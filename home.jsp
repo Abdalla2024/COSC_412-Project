@@ -150,6 +150,7 @@ catch(SQLException e){
 %>
 
 
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -188,34 +189,49 @@ catch(SQLException e){
     </div>
 
     <script>
-    let suggestions = [
-        "Channel",
-        "CodingLab",
-        "CodingNepal",
-        "YouTube",
-        "YouTuber",
-        "YouTube Channel",
-        "Blogger",
-        "Bollywood",
-        "Vlogger",
-        "Vechiles",
-        "Facebook",
-        "Freelancer",
-        "Facebook Page",
-        "Designer",
-        "Developer",
-        "Web Designer",
-        "Web Developer",
-        "Login Form in HTML & CSS",
-        "How to learn HTML & CSS",
-        "How to learn JavaScript",
-        "How to became Freelancer",
-        "How to became Web Designer",
-        "How to start Gaming Channel",
-        "How to start YouTube Channel",
-        "What does HTML stands for?",
-        "What does CSS stands for?",
-    ];
+    
+    let suggestions = [];
+    <%
+  //java
+  int i = 0;
+  int numMovies = 0;
+  st = dbConn.createStatement();
+  lt = dbConn.createStatement();
+  rs = st.executeQuery("SELECT * FROM movies");
+  ls = lt.executeQuery("SELECT * FROM movies");
+
+  try{
+  //get num of movies
+  while(rs.next()) 
+  {   
+  	numMovies++;
+
+  }
+
+  //array to store all movie names
+  String[] movieList = new String[numMovies];  
+
+  //add movie names to list
+  while(ls.next()) 
+  {   
+  	movieList[i] = ls.getString(1);
+  	i++;
+  }
+            		  
+          		  
+  //this puts all the elements in movieList into keywords
+  for(i = 0; i < numMovies; i++){
+  %>
+  	suggestions[<%= i %>] = "<%= movieList[i] %>"
+  <%
+  }
+
+  }
+
+  catch(SQLException e){
+  	out.println("ERROR: COULD NOT CONNECT TO DATABASE"); //if you see this error, you fucked something up with the database or java code that talks with the database.
+  }
+  %>
 
     // getting all required elements
     const searchInput = document.querySelector(".searchInput");
