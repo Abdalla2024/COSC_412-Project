@@ -149,166 +149,70 @@ catch(SQLException e){
 //Copy and paste this entire java block to the top of any web page where the user should be logged in to use it!!
 %>
 
-
-
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home Page</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-    <link rel="stylesheet" href="homestyle.css" />
-  </head>
-  <body>
-    <div class="container">
-      <nav>
-        <h1>FilmFocus</h1>
-        <ul>
-          <li>Watch List</li>
-          <li>See Recommended</li>
-        </ul>
-        <button class="profile"><img src="profile.png" alt="" /></button>
-      </nav>
-      <div class="search">
-  <div class="searchInput">
-    <input type="text" placeholder="Search for movie">
-    <div class="resultBox">
-      <!-- here list are inserted from javascript -->
-    </div>
-    <div class="icon"><i class="fas fa-search"></i></div>
-  </div>
-</div>
-      <div class="content">
-        <h1><br />Trending Movies</h1>
-      </div>
-    </div>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
 
-    <script>
-    
-    let suggestions = [];
-    <%
-  //java
-  int i = 0;
-  int numMovies = 0;
-  st = dbConn.createStatement();
-  lt = dbConn.createStatement();
-  rs = st.executeQuery("SELECT * FROM movies");
-  ls = lt.executeQuery("SELECT * FROM movies");
 
-  try{
-  //get num of movies
-  while(rs.next()) 
-  {   
-  	numMovies++;
+<%
 
-  }
+String movieSearch = request.getParameter("sendSearchResults");
+String name = "Issue getting name from DB...";
+String director = "Issue getting director from DB...";
+String genre = "Issue getting genre from DB...";
+String year = "Issue getting year from DB...";
+String description = "Issue getting description from DB...";
 
-  //array to store all movie names
-  String[] movieList = new String[numMovies];  
 
-  //add movie names to list
-  while(ls.next()) 
-  {   
-  	movieList[i] = ls.getString(1);
-  	i++;
-  }
-            		  
-          		  
-  //this puts all the elements in movieList into keywords
-  for(i = 0; i < numMovies; i++){
-  %>
-  	suggestions[<%= i %>] = "<%= movieList[i] %>"
-  <%
-  }
+st = dbConn.createStatement();
+String selectMovieName = "SELECT * FROM movies WHERE name = ?";
+PreparedStatement searchStatement = dbConn.prepareStatement(selectMovieName);
+searchStatement.setString(1, movieSearch);
+rs = searchStatement.executeQuery();
 
-  }
+try {
+	
+	while(rs.next()) {   //
+		name = rs.getString(1);
+		director = rs.getString(2);
+		genre = rs.getString(3);
+		year = Integer.toString((rs.getInt(4)));
+		description = rs.getString(5);
+	}
+}
+	catch(SQLException e){
+		out.println("ERROR: COULD NOT CONNECT TO DATABASE"); //if you see this error, you fucked something up with the database or java code that talks with the database.
+	}
 
-  catch(SQLException e){
-  	out.println("ERROR: COULD NOT CONNECT TO DATABASE"); //if you see this error, you fucked something up with the database or java code that talks with the database.
-  }
-  %>
 
-    // getting all required elements
-    const searchInput = document.querySelector(".searchInput");
-    const input = searchInput.querySelector("input");
-    const resultBox = searchInput.querySelector(".resultBox");
-    const icon = searchInput.querySelector(".icon");
-    let linkTag = searchInput.querySelector("a");
-    let webLink;
+out.println("<br>" + name + "</br>");
 
-    // if user press any key and release
-    input.onkeyup = (e)=>{
-        let userData = e.target.value; //user enetered data
-        let emptyArray = [];
-        if(userData){
-            emptyArray = suggestions.filter((data)=>{
-                //filtering array value and user characters to lowercase and return only those words which are start with user enetered chars
-                return data.toLocaleLowerCase().startsWith(userData.toLocaleLowerCase()); 
-            });
-            emptyArray = emptyArray.map((data)=>{
-                // passing return data inside li tag
-                return data = '<li>'+ data +'</li>';
-            });
-            searchInput.classList.add("active"); //show autocomplete box
-            showSuggestions(emptyArray);
-            let allList = resultBox.querySelectorAll("li");
-            for (let i = 0; i < allList.length; i++) {
-                //adding onclick attribute in all li tag
-                allList[i].setAttribute("onclick", "select(this)");
-            }
-        }else{
-            searchInput.classList.remove("active"); //hide autocomplete box
-        }
-    }
+out.println("<br></br>");
 
-    function showSuggestions(list){
-        let listData;
-        if(!list.length){
-            userValue = inputBox.value;
-            listData = '<li>'+ userValue +'</li>';
-        }else{
-            listData = list.join('');
-        }
-        resultBox.innerHTML = listData;
-    }
-    
-    
-    function select(el){
-    	console.log(this.constructor.name)
-    	
-    }
+out.println("<br>" + director + "</br>");
 
-    </script>
-    
-    <form id="myForm" action="showMovie.jsp" method="post">
-		<input type="hidden" name="sendSearchResults" id="myField" value="" />
-	</form>
-    
-    
-    <script>
-		function select(el) {
-		    // Extract the text content of the clicked element
-		    var selectedText = el.textContent;
-		    
-		    // Do whatever you need with the selected text
-		    document.getElementById('myField').value = selectedText;
-		    //console.log("Selected text:", selectedText);
-		    
-	        // Submit the form
-	        document.getElementById('myForm').submit();
-		}
-</script>
-    
+out.println("<br></br>");
+
+out.println("<br>" + genre + "</br>");
+
+out.println("<br></br>");
+
+out.println("<br>" + year + "</br>");
+
+out.println("<br></br>");
+
+out.println("<br>" + description + "</br>");
+
+out.println("<br></br>");
 
 
 
+%>
 
-    
-  </body>
+
+</body>
 </html>
-
