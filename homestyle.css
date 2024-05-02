@@ -1,0 +1,236 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 100%;
+    min-height: 100vh;
+    background: linear-gradient(to bottom, #000011, #000033);
+    background-size: cover;
+    background-position: center;
+}
+
+nav {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+}
+
+nav h1 {
+    padding-top: 10px;
+    padding-left: 20px;
+    text-align: center;
+    margin: 10px 20px;
+    font-size: 50px; /* Adjust font size as needed */
+    color: #fff;
+    font-weight: bold;
+}
+
+
+.profile {
+    width: 50px; /* Adjust the width and height to your desired size */
+    height:50px;
+    border-radius: 50%; /* This will make the container circular */
+    overflow: hidden; /* This will hide any parts of the image that exceed the circular border */
+    border: 2px solid black;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.profile img {
+    width: 115%; /* Increase the width of the image by 10% */
+    height: 115%; /* Increase the height of the image by 10% */
+    transform: translate(-6.3%, -6.3%); /* Move the image slightly to the top-left to center it */
+}
+
+.logo {
+    width: 180px;
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+nav ul li{
+    padding-top: 10px;
+    text-align: center;
+    display: inline-block;
+    margin: 10px 20px;
+    font-size: 24px; /* Adjust font size as needed */
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+nav ul li button {
+    width: 250px; /* Adjust width as needed */
+    height: 40px; /* Adjust height as needed */
+    
+    background: #fff;
+    font-size: 20px;
+    
+    border-radius: 10px; /* Half of the height, making it an oval shape */
+    border: none; /* Remove default button border */
+     /* Change cursor to pointer on hover */ 
+}
+
+.wrapper {
+    width: 500px;
+    margin: 100px auto;
+}
+
+
+.content h1 {
+    margin: 0;
+    color: #fff;
+    font-size: 70px;
+    font-weight: 600;
+    line-height: 85px;
+    margin-bottom: 25px;
+    padding-left: 20px;
+}
+
+
+.search{
+  max-width: 450px;
+  margin: 150px auto;
+  margin-bottom: 90px;
+}
+
+.search .searchInput{
+  background: #fff;
+  width: 100%;
+  border-radius: 5px;
+  position: relative;
+  box-shadow: 0px 1px 5px 3px rgba(0,0,0,0.12);
+}
+
+.searchInput input{
+  height: 55px;
+  width: 100%;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  padding: 0 60px 0 20px;
+  font-size: 18px;
+  box-shadow: 0px 1px 5px rgba(0,0,0,0.1);
+}
+
+.searchInput.active input{
+  border-radius: 5px 5px 0 0;
+}
+
+.searchInput .resultBox{
+  padding: 0;
+  opacity: 0;
+  pointer-events: none;
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.searchInput.active .resultBox{
+  padding: 10px 8px;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.resultBox li{
+  list-style: none;
+  padding: 8px 12px;
+  display: none;
+  width: 100%;
+  cursor: default;
+  border-radius: 3px;
+}
+
+.searchInput.active .resultBox li{
+  display: block;
+}
+.resultBox li:hover{
+  background: #efefef;
+}
+
+.searchInput .icon{
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  height: 55px;
+  width: 55px;
+  text-align: center;
+  line-height: 55px;
+  font-size: 20px;
+  color: #644bff;
+  cursor: pointer;
+}
+
+.dropdown-content {
+	display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 10px; /* Adjust the width of the dropdown content */
+    max-width: 90px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 8px; /* Add rounded corners */
+    left: -20px; /* Adjust the position to the left */
+    overflow: hidden;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 8px 12px; /* Adjust the padding of the links */
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #efefef;
+    border-radius: 8px;
+}
+
+.logout-container {
+    position: relative;
+    display: inline-block;
+}
+
+
+.content p{
+    text-align: center;
+}
+
+.movie-list {
+    display: flex;
+    overflow-x: auto; /* Allow horizontal scrolling if needed */
+    padding: 20px 0;
+    padding-left: 20px; /* Add left padding */
+}
+
+.movie {
+    margin-right: 20px; /* Add spacing between movies */
+    transition: transform 0.3s; /* Add smooth transition effect */
+}
+
+.movie img {
+    width: 150px; /* Set a fixed width */
+    height: 200px; /* Set a fixed height */
+    object-fit: cover; /* Ensure the entire area of the container is covered */
+    cursor: pointer;
+}
+
+.movie p {
+    margin-top: 5px;
+    font-size: 16px;
+    color: white;
+}
+
+.movie:hover {
+    transform: scale(1.05); /* Increase size on hover */
+}
+
+
+
