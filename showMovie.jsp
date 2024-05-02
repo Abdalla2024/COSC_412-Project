@@ -156,7 +156,14 @@ catch(SQLException e){
 <title>Insert title here</title>
 </head>
 <body>
-
+<nav>
+   <h1>FilmFocus</h1>
+   <ul>
+     <li>Watch List</li>
+     <li>See Recommended</li>
+    </ul>
+    <button class="profile"><img src="profile.png" alt="" /></button>
+ </nav>
 
 <%
 
