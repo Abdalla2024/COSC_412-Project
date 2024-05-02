@@ -164,4 +164,16 @@ nav ul li button {
   font-size: 20px;
   color: #644bff;
   cursor: pointer;
+
+.container {
+  display: flex;
+}
+
+.image {
+  flex: 0 0 auto; /* Let the image take the width it needs */
+}
+
+.text {
+  flex: 1; /* Let the text take the remaining width */
+}
 }
